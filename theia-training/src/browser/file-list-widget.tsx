@@ -62,6 +62,9 @@ export class FileListWidget extends ReactWidget implements StatefulWidget {
     protected current: Files & { uri: string } | undefined;
 
     protected render(): React.ReactNode {
+        if (!this.online) {
+            return <div>Offline</div>;
+        }
         const children = this.current && this.current.children;
         return <React.Fragment>
             {this.path.length > 0 && <div onClick={this.openParent}>..</div>}

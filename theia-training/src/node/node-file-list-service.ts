@@ -1,8 +1,8 @@
-// import * as fs from 'fs-extra';
+import * as fs from 'fs-extra';
 import { FileListService, Files } from "../common/file-list-protocol";
-// import { FileUri } from "@theia/core/lib/node/file-uri";
+import { FileUri } from "@theia/core/lib/node/file-uri";
 import { injectable, inject } from "inversify";
-// import URI from '@theia/core/lib/common/uri';
+import URI from '@theia/core/lib/common/uri';
 import { MessageService } from '@theia/core';
 
 @injectable()
@@ -21,7 +21,21 @@ export class NodeFileListService implements FileListService {
         // use `new URI(uri).resolve(dir).toString()` to construct a child uri
         // remember that only URIs can be passed between frontend and backend, never paths
         // see https://github.com/eclipse-theia/theia/wiki/Coding-Guidelines#uripath
-        throw new Error('not implemented');
+        // throw new Error('not implemented');
+        this.messageService.info(uri);
+        const currentUri = new URI(uri);
+        const fsPath = FileUri.fsPath(currentUri);
+        const stat = await fs.stat(fsPath);
+        if (!stat.isDirectory()) {
+            return {
+                isDirectory: false
+            };
+        }
+        const files = await fs.readdir(fsPath);
+        return {
+            isDirectory: true,
+            children: files.map(file => currentUri.withPath(currentUri.path.join(file)).toString())
+        };
     }
 
 }
