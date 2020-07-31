@@ -1,6 +1,6 @@
 # Exercise 4: Implement JSON-Form Widget Open Handler
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/akosyakov/theia-training/tree/exercise-4)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io#https://github.com/Phil1iu/theia-training/tree/exercise-4)
 
 In this exercise, you learn:
 - how to add a new open handler;
